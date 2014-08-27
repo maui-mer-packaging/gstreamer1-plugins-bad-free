@@ -1,0 +1,86 @@
+Name: gstreamer1-plugins-bad-free
+Version: 1.4.1
+Release: 1
+Group: Applications/Multimedia
+License: LGPLv2+ and LGPLv2
+Summary: GStreamer streaming media framework "bad" plugins
+Description: |
+  GStreamer is a streaming media framework, based on graphs of filters which
+  operate on media data. Applications using this library can do anything
+  from real-time sound processing to playing videos, and just about anything
+  else media-related.  Its plugin-based architecture means that new data
+  types or processing capabilities can be added simply by installing new
+  plug-ins.
+
+  GStreamer Good Plugins is a collection of well-supported plugins of
+  good quality and under the LGPL license.
+URL: http://gstreamer.freedesktop.org/
+Sources:
+    - "%{name}-%{version}.tar.xz"
+    - gst-p-bad-cleanup.sh
+SetupOptions: -q -n %{name}-%{version}/upstream
+
+Macros:
+    - majorminor;1.0
+
+PkgBR:
+    - gettext-devel
+    - intltool
+    - bzip2-devel
+    - check
+    - chrpath
+PkgConfigBR:
+    - gstreamer-1.0
+    - gstreamer-plugins-base-1.0
+    - xt
+    - orc-0.4 >= 0.4.18
+    - libexif
+    - wayland-client
+
+NoAutoLocale: true
+
+FilesInput: gst-plugins-bad-%{majorminor}.lang
+
+ConfigOptions:
+    - --with-package-name='Maui GStreamer package'
+    - --with-package-origin='http://www.maui-project.org/'
+    - --enable-experimental
+    - --enable-gtk-doc=no
+    - --enable-introspection=no
+    - --enable-orc
+    - --enable-debug
+    - --disable-fbdev
+    - --disable-decklink
+    - --disable-linsys
+    - --disable-dts
+    - --disable-faac
+    - --disable-faad
+    - --disable-nas
+    - --disable-mimic
+    - --disable-libmms
+    - --disable-mpeg2enc
+    - --disable-mplex
+    - --disable-neon
+    - --disable-openal
+    - --disable-rtmp
+    - --disable-xvid
+    - --disable-chromaprint
+    - --disable-eglgles
+    - --disable-flite
+    - --disable-mpg123
+    - --disable-ofa
+    - --disable-opencv
+    - --disable-sbc
+    - --disable-spandsp
+    - --disable-uvch264
+    - --disable-voamrwbenc
+    - --disable-webp
+    - --disable-openjpeg
+
+SubPackages:
+    - Name: devel
+      Summary: GStreamer Base Plugins Development files
+      Group: Development/Libraries
+      Description: |
+        The %{name}-devel package contains libraries and header files
+        for developing applications that use %{name}.
